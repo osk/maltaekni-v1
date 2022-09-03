@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="is">
+  <head>
+    <meta charset="utf-8" />
+    <title>Umorðunarverkefni</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="scripts.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>Umorðunarverkefni</h1>
+
+      <p>
+        Í þessu verkefni er markmiðið að búa til íslenska umorðunar málheild (e. paraphrasing
+        corpus). Engin slík málheild hefur verið búin til fyrir íslensku og því eruð þið að taka
+        þátt í brautryðjandi verkefni. Umorðun er meðal annars notuð til að greina ritstuld, hver
+        skrifaði texta, í spurningasvörun, samantektargerð og fleira.
+      </p>
+      <p>
+        Í hverju mörkunarverkefni fáið þið tvær setningar og þið þurfið að velja einn af
+        eftirfarandi möguleikum:
+      </p>
+      <ul>
+        <li>
+          4: Setningarnar hafa sömu merkingu og hægt væri að skipta annarri út fyrir hina í hvaða
+          samhengi sem er.
+        </li>
+        <li>
+          3: Setningarnar hafa sömu merkingu en merkingin er háð samhenginu. Þ.e.a.s. ekki væri
+          alltaf hægt að skipta annarri út fyrir hina ef samhengið býður ekki upp á það.
+        </li>
+        <li>2: Setningarnar eru tengdar að einhverju leyti en önnur er ekki umorðun á hinni.</li>
+        <li>1: Það eru engin tengsl milli setninganna.</li>
+      </ul>
+      <p>
+        <small>
+          Reglurnar byggja á
+          <a href="https://arxiv.org/pdf/2108.07499.pdf"
+            >sambærilegri málheild sem gerð var fyrir Turku</a
+          >.</small
+        >
+      </p>
+      <% if (!error) { %>
+      <section>
+        <h2>Flokkun</h2>
+        <form method="post" action="/classify">
+          <p class="text first">
+            <%= sentence_one %>
+          </p>
+          <p class="text second">
+            <%= sentence_two %>
+          </p>
+          <p class="status"><span class="count">Flokkaðu</span> <span class="emoji">👇👇👇</span></p>
+          <input type="hidden" name="id" value="<%= id %>" />
+          <button name="value" value="4">4: Sama merking í hvaða samhengi sem er</button>
+          <button name="value" value="3">3: Sama merking en háð samhenginu</button>
+          <button name="value" value="2">
+            2: Einhver tenging, ekki umorðun
+          </button>
+          <button name="value" value="1">1: Engin tengsl</button>
+        </form>
+      </section>
+      <% } else { %>
+        <section>
+          <p>Villa í forriti 😭</p>
+        </section>
+      <% } %>
+    </main>
+  </body>
+</html>
